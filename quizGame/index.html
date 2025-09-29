@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src\style\style.css">
+    <title>Quiz</title>
+  </head>
+  <body>
+
+    <div class="container">
+
+    <!-- Start Screen -->
+      <div class="screen begin active" id="startScreen">
+        <h1>Pokemon Quiz</h1>
+        <p>Test your knowledge of Pokemon</p>
+        <button class="start" id="start">Start</button>
+      </div>
+
+    <!-- Question Screen -->
+      <div class="screen quiz" id="questionScreen">
+      <!-- Header -->
+        <div class="quizHeader">
+          <h3>Question Time!</h3>
+          <h1 id="question">question goes here</h1>
+          <div class="questionInfo">
+            <p>Question: <span id="current">0</span> of <span id="total">15</span></p>
+            <p>Score: <span id="score">0</span></p>
+          </div>
+        </div>
+      <!-- Answers -->
+        <div id="answersContainer" class="answers">
+          <!-- Answer buttons go here from javascript -->
+        </div>
+
+        <div class="progressBar">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+        
+        <!-- Result Screen -->
+        <div class="screen result" id="resultScreen">
+          <h1>Done!</h1>
+          <div class="resultInfo">
+            <h2>Here are the results.</h2>
+            <p class="finalScore">Final Score: <span id="finalScore">0</span></p>
+            <p class="resultMessage" id="resultMessage">Great Job!</p>
+          </div>
+          <button class="playAgain" id="playAgain">Play Again</button>
+        </div>
+        
+    </div>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

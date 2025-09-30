@@ -11,11 +11,12 @@ body {
   min-height: 100vh;
   padding: 1rem;
   background: beige;
+  color: rgb(66, 73, 70);
   font-family: "poppins", sans-serif;
 }
 
 .container {
-  background-color: white;
+  background-color: whitesmoke;
   border-radius: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -25,8 +26,8 @@ body {
 }
 
 button {
-  background-color: rgb(142, 215, 218);
-  color: white;
+  background-color: rgb(131, 191, 226);
+  color: whitesmoke;
   border: none;
   padding: 15px 30px;
   border-radius: 5px;
@@ -35,7 +36,7 @@ button {
   transition: background-color 0.3s ease;
 }
 button:hover {
-  background-color: rgb(99, 187, 190);
+  background-color: rgb(100, 163, 199);
 }
 
 .screen {
@@ -49,14 +50,14 @@ button:hover {
 }
 
 /* Start Screen */
-.start h1 {
+.begin h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: rgb(142, 215, 218);
+  color: rgb(131, 191, 226);
 }
-.start p {
+.begin p {
   font-size: 1.1rem;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 /* Question Screen */
@@ -64,7 +65,7 @@ button:hover {
   margin-bottom: 1rem;
 }
 .quiz .quizHeader h3 {
-  color: rgb(142, 215, 218);
+  color: rgb(131, 191, 226);
   margin-bottom: 10px;
 }
 .quiz .quizHeader #question {
@@ -121,7 +122,7 @@ button:hover {
 
 /* Final Screen */
 .result h1 {
-  color: rgb(142, 215, 218);
+  color: rgb(131, 191, 226);
   margin-bottom: 10px;
 }
 .result .resultInfo {

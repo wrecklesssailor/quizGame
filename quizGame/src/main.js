@@ -31,12 +31,12 @@ const quizQuestions = [
         ],
     },
     {
-        question: "Which Pokémon is known as the “Guardian of the Sea”?",
+        question: "Which Pokémon is known as the “Guardian of the Sky”?",
         answers: [
-            { text: "Manaphy", correct: false },
-            { text: "Suicune", correct: false },
-            { text: "Kyogre", correct: false },
-            { text: "Lugia", correct: true },
+            { text: "Arceus", correct: false },
+            { text: "Celebi", correct: false },
+            { text: "Rayquaza", correct: true },
+            { text: "Lugia", correct: false },
         ],
     },
     {
@@ -94,7 +94,7 @@ const quizQuestions = [
         ],
     },
     {
-        question: "Which of these types are have NO EFFECT against FAIRY type Pokemon?",
+        question: "Which of these types have NO EFFECT against FAIRY type Pokemon?",
         answers: [
             { text: "Dragon", correct: true },
             { text: "Ice", correct: false },
@@ -112,7 +112,7 @@ const quizQuestions = [
         ],
     },
     {
-        question: "Which of these is NOT a gang in Pokemon?",
+        question: "Which of these are NOT a real gang in Pokemon?",
         answers: [
             { text: "Skull", correct: false },
             { text: "Plasma", correct: false },
@@ -121,7 +121,7 @@ const quizQuestions = [
         ],
     },
     {
-        question: "Which generation did Pokemon start Mega Evolution in?",
+        question: "Which generation did Pokemon start Mega Evolving?",
         answers: [
             { text: "6", correct: true },
             { text: "7", correct: false },
@@ -130,7 +130,7 @@ const quizQuestions = [
         ],
     },
     {
-        question: "Which of these are NOT the name of a Island in Pokemon?",
+        question: "Which of these are NOT the name of an Island in Pokemon?",
         answers: [
             { text: "Cinnabar", correct: false },
             { text: "Stormy", correct: true },
@@ -139,7 +139,7 @@ const quizQuestions = [
         ],
     },
     {
-        question: "Name Meowth's final evolution.",
+        question: "Choose Meowth's final evolution.",
         answers: [
             { text: "Lieperd", correct: false },
             { text: "Purrloin", correct: false },
@@ -175,35 +175,66 @@ restartButton.addEventListener("click", restartQuiz);
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
+
+/**
+ * Starts the quiz by shuffling the questions, resetting the score and
+ * question count, and switching to the question screen.
+ */
 function startQuiz() {
+    shuffleQuestions(quizQuestions);
     currentQuestionCount = 0;
     score = 0;
+    scoreCurrent.textContent = score;
     questionAnswered = false;
     startScreen.classList.remove("active");
     questionScreen.classList.add("active");
     loadQuestion();
-    console.log('quiz started');
 }
 
+
+/**
+ * Resets the quiz by hiding the result screen and showing the start screen
+ */
 function restartQuiz() {
-    console.log('quiz restarted');
+    resultScreen.classList.remove("active");
+    startScreen.classList.add("active");
 }
 
+
+/**
+ * Shuffles an array to provide a randomized order.
+ * 
+ * @param {array} array - An array of questions to shuffle.
+ * @returns {array} The shuffled array of questions.
+ */
+function shuffleQuestions(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+}
+
+
+/**
+ * Resets the question state, loads the current question text, shuffles the
+ * answer buttons, and loads them into the answers container.
+ *
+ */
 function loadQuestion() {
-    // reset state
 questionAnswered = false;
 
-// get current question
 const currentQuestion = quizQuestions[currentQuestionCount];
 
-// track progress
 currentQuestionNumber.textContent = currentQuestionCount + 1;
 
-const progressPercent = (currentQuestionCount / quizQuestions.length) * 100;
+const progressPercent = (currentQuestionCount / 10) * 100;
 progressBar.style.width = `${progressPercent}%`;
 
-// Load Text
 question.textContent = currentQuestion.question;
+
+shuffleQuestions(currentQuestion.answers);
 
 answersContainer.innerHTML = "";
 currentQuestion.answers.forEach((answer) => {
@@ -217,6 +248,12 @@ currentQuestion.answers.forEach((answer) => {
 });
 }
 
+
+/**
+ * Handles the user's answer to a question. If the answer is correct, 
+ * adds one to the score and marks the answer as correct. If the answer is 
+ * incorrect, marks the answer as incorrect.
+ */
 function selectAnswer(e) {
     const selectedAnswer = e.target;
 
@@ -236,7 +273,7 @@ function selectAnswer(e) {
 
       setTimeout(() => {
     currentQuestionCount++;
-    if (currentQuestionCount < quizQuestions.length) {
+    if (currentQuestionCount < 10) {
       loadQuestion();
     } else {
       questionScreen.classList.remove("active");
@@ -246,18 +283,20 @@ function selectAnswer(e) {
   }, 1000);
 };
 
+
+/**
+ * Shows the final result of the quiz, including the final score and a message based on the score.
+ */
 function showResult() {
     finalScore.textContent = score;
 
-    if (score >= 15) {
-        resultMessage.textContent = "You are a Pokemon Master!"
-    } else if (score >= 12) {
-        resultMessage.textContent = "Amazing!"
-    } else if (score >= 10) {
-        resultMessage.textContent = "You did great!"
-    } else if (score >= 7) {
-        resultMessage.textContent = "Timid!"
+    if (score == 10) {
+        resultMessage.textContent = "You're a Pokemon Master!";
+    } else if (score > 7) {
+        resultMessage.textContent = "You need more training!";
+    } else if (score > 4) {
+        resultMessage.textContent = "Timid!";
     } else {
-        resultMessage.textContent = "You can do better!"
+        resultMessage.textContent = "You gotta be Precious.";
     }
 }

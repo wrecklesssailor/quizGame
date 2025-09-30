@@ -15,6 +15,9 @@ const progressBar = document.getElementById("progress");
 const finalScore = document.getElementById("finalScore");
 const resultMessage = document.getElementById("resultMessage");
 const restartButton = document.getElementById("playAgain");
+const correctSound = new Audio("src/sounds/correct.mp3");
+const incorrectSound = new Audio("src/sounds/incorrect.mp3");
+const doneSound = new Audio("src/sounds/done.mp3");
 
 /* -------------------------------------------------------------------------- */
 /*                                  Questions                                 */
@@ -264,11 +267,13 @@ function selectAnswer(e) {
     const isCorrect = selectedAnswer.dataset.correct === "true";
 
     if (isCorrect) {
+        correctSound.play();
         selectedAnswer.classList.add("correct");
         score++;
         scoreCurrent.textContent = score;
     } else {
         selectedAnswer.classList.add("incorrect");
+        incorrectSound.play();
     }
 
       setTimeout(() => {
@@ -289,7 +294,7 @@ function selectAnswer(e) {
  */
 function showResult() {
     finalScore.textContent = score;
-
+    doneSound.play();
     if (score == 10) {
         resultMessage.textContent = "You're a Pokemon Master!";
     } else if (score > 7) {
